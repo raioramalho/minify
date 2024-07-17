@@ -1,0 +1,6 @@
+POST https://api.minify.icu
+Content-Type: application/json
+
+{
+    "url": "github.com/raioramalho"
+}
