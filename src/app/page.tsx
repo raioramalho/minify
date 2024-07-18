@@ -9,13 +9,13 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CopyIcon } from "@radix-ui/react-icons";
+import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
 export default function Home() {
   let [loading, setLoading] = useState(false);
   let [minifiedUrl, setMinifiedUrl] = useState("");
-  let [status, setStatus] = useState("");
+  let [status, setStatus] = useState(<></>);
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -33,13 +33,22 @@ export default function Home() {
     let json: any = await res.json();
 
     setMinifiedUrl(json.tinnyUrl);
-
+    setStatus(<Status message="Minified!" />);
     setLoading(false);
+  }
+
+  function Status(props: any) {
+    return (
+      <Label className="flex flex-row justify-center items-center">
+      {props.message} 
+      <CheckIcon className="w-8 h-8 text-green-500"/>
+    </Label>
+    )
   }
 
   function copyToClipboard() {
     navigator.clipboard.writeText(minifiedUrl);
-    setStatus("Copied to clipboard");
+    setStatus(<Status message="Copied to clipboard!" />);
   }
 
   return (
@@ -74,14 +83,18 @@ export default function Home() {
                   />
                   <CopyIcon onClick={copyToClipboard} className="cursor-pointer gap-2 w-8 h-8" />
                 </span>
+                <span className="flex flex-row gap-2 justify-center items-center">
+                  <Label className="text-xs">{status}</Label>
+                </span>
                 <Button className="" type="submit">Minify!</Button>
               </form>
             </CardContent>
 
             <Separator className="w-full" />
 
-            <CardFooter className="flex flex-row justify-center items-center p-2 gap-2">
+            <CardFooter className="flex flex-col justify-center items-center p-2 gap-2">
               <Label>www.minify.icu - All R Reserved - 2024</Label>
+              <Label>Alan Ramalho - ramalho.sit@gmail.com</Label>
             </CardFooter>
 
             <Separator className="w-full" />
