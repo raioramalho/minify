@@ -11,6 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
   let [loading, setLoading] = useState(false);
@@ -53,6 +54,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 w-full">
+      <Analytics/>
       <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex gap-4">
         <div className="max-w-5xl">
           <Card className="gap-2 flex flex-col p-2 w-full">
